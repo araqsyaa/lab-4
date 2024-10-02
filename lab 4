@@ -1,0 +1,54 @@
+#include <iostream>
+#include <ctime>
+#include <iomanip> 
+using namespace std;
+
+const int n = 5;
+
+class Matrix {
+    const int size;
+    int mat[n][n];
+
+public:
+    Matrix(int s) : size(s) {
+        srand(time(0));
+        fillMatrix();
+    }
+
+    void fillMatrix() {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                mat[i][j] = rand() % 20;
+            }
+        }
+    }
+
+    void rotateMatrix() {
+        for (int i = 0; i < size; i++) {
+            for (int j = i + 1; j < size; j++) {
+                int temp = mat[i][j];
+                mat[i][j] = mat[j][i];
+                mat[j][i] = temp;
+            }
+        }
+
+    }
+    void printMatrix() {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                cout << setw(4) << mat[i][j] << " ";
+            }
+            cout << endl;
+        }
+    }
+};
+
+int main() {
+    Matrix matrix(n);
+    cout << "Original matrix:" << endl;
+    matrix.printMatrix();
+    matrix.rotateMatrix();
+    cout << "\nRotated matrix:" << endl;
+    matrix.printMatrix();
+    return 0;
+}
